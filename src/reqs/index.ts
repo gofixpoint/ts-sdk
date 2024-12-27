@@ -12,3 +12,9 @@ export {
   CreateBatchWebpageParseRequest,
   BatchWebpageParseResult
 };
+
+export {
+  createPatentExtraction,
+  CreatePatentExtractionRequest,
+  CreatePatentExtractionResponse
+} from "./patents";

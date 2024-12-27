@@ -41,8 +41,8 @@ export type BatchWebpageParseResult = z.infer<
 >;
 
 export const createBatchWebpageParse = async (
-  req: CreateBatchWebpageParseRequest,
   apiKey: string,
+  req: CreateBatchWebpageParseRequest,
   options?: RequestOptions
 ): Promise<BatchWebpageParseResult> => {
   const baseUrl = options?.baseUrl ?? BASE_URL;

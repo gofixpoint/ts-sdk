@@ -1,3 +1,12 @@
+/**
+ * Run via:
+ *
+ * ```bash
+ * FIXPOINT_API_KEY=$(cat ../../.env | grep FIXPOINT_API_KEY | cut -d= -f2) \
+ *     pnpm tsx scripts/sitemap-parse.ts
+ * ```
+ */
+
 import fs from "fs";
 import { ApiError } from "../dist/errors";
 import { reqs } from "../dist/index";
@@ -5,14 +14,14 @@ import { reqs } from "../dist/index";
 const LOCAL_BASE_URL = "http://localhost:8000";
 
 const main = async (): Promise<void> => {
-  const apiKey = process.env.FIXPOINT_API_KEY;
+  const apiKey: string = process.env.FIXPOINT_API_KEY;
   if (!apiKey) {
     throw new Error("FIXPOINT_API_KEY is not set");
   }
   const opts = { timeout: 200 * 1000, baseUrl: LOCAL_BASE_URL };
   let sitemap: reqs.Sitemap;
   try {
-    sitemap = await reqs.createSitemap("https://mintlify.com/", apiKey, opts);
+    sitemap = await reqs.createSitemap(apiKey, "https://mintlify.com/", opts);
   } catch (error) {
     if (error instanceof ApiError) {
       console.log(error.message);
@@ -32,8 +41,8 @@ const main = async (): Promise<void> => {
     output_formats: ["markdown", "chunked_markdown"]
   };
   const batchParseRes = await reqs.createBatchWebpageParse(
-    batchParseReq,
     apiKey,
+    batchParseReq,
     opts
   );
   writeToFile("batch-parse-output.json", batchParseRes);

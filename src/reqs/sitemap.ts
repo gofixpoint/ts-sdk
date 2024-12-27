@@ -18,8 +18,8 @@ export const siteMapSchema = z.object({
 export type Sitemap = z.infer<typeof siteMapSchema>;
 
 export const createSitemap = async (
-  url: string,
   apiKey: string,
+  url: string,
   options?: RequestOptions
 ): Promise<Sitemap> => {
   const baseUrl = options?.baseUrl ?? BASE_URL;
