@@ -17,3 +17,15 @@ export function joinPaths(paths: string[]): string {
     })
     .join("/");
 }
+
+export function convertToAbortSignal(
+  arg?: number | AbortSignal
+): AbortSignal | undefined {
+  if (typeof arg === "number") {
+    return AbortSignal.timeout(arg);
+  } else if (arg instanceof AbortSignal) {
+    return arg;
+  } else {
+    return undefined;
+  }
+}

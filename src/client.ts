@@ -1,12 +1,12 @@
-import fetch from "node-fetch";
+import fetch from "cross-fetch";
 
-import { joinPaths } from "./utils";
+import { joinPaths, convertToAbortSignal } from "./utils";
 
 export interface RequestOptions {
   method?: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
   headers?: Record<string, string>;
   body?: unknown;
-  timeout?: number;
+  timeout?: number | AbortSignal;
 }
 
 export interface HttpResponse<T = unknown> {
@@ -39,15 +39,15 @@ export class HttpClient {
       throw this.#handleError(error);
     }
 
+    const signal = convertToAbortSignal(options.timeout);
+
     try {
       // Browser-side request using fetch API
       const response = await fetch(fullURL, {
         method: options.method || "GET",
         headers: reqHeaders,
         body,
-        signal: options.timeout
-          ? AbortSignal.timeout(options.timeout)
-          : undefined
+        signal: signal
       });
 
       const data = await response.json();
