@@ -1,17 +1,18 @@
-import { createSitemap, Sitemap } from "./sitemap";
-import {
+export { createSitemap, Sitemap } from "./sitemap";
+
+export {
   createBatchWebpageParse,
   CreateBatchWebpageParseRequest,
   BatchWebpageParseResult
 } from "./batch-parse";
 
 export {
-  createSitemap,
-  Sitemap,
-  createBatchWebpageParse,
-  CreateBatchWebpageParseRequest,
-  BatchWebpageParseResult
-};
+  createBatchWebpageParseJob,
+  CreateBatchWebpageParseJobRequest,
+  BatchWebpageParseJob,
+  BatchWebpageParseJobStatus,
+  getBatchWebpageParseJobStatus
+} from "./batch-parse-jobs";
 
 export {
   createPatentExtraction,
