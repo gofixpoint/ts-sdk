@@ -22,7 +22,7 @@ export class HttpClient {
   apiVersion: ApiVersion;
 
   constructor(
-    baseURL: string = "https://api.fixpoint.com",
+    baseURL: string = "https://api.fixpoint.co",
     apiVersion: ApiVersion = "v1"
   ) {
     this.baseURL = baseURL;
