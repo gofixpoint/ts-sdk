@@ -18,3 +18,9 @@ export {
   CreatePatentExtractionRequest,
   CreatePatentExtractionResponse
 } from "./patents";
+
+export {
+  getCompanyData,
+  GetCompanyDataRequest,
+  CompanyData
+} from "./companies";
