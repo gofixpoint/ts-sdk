@@ -15,18 +15,25 @@ export interface HttpResponse<T = unknown> {
   headers: Record<string, string>;
 }
 
+type ApiVersion = "v1";
+
 export class HttpClient {
   baseURL: string;
+  apiVersion: ApiVersion;
 
-  constructor(baseURL: string = "https://api.fixpoint.com") {
+  constructor(
+    baseURL: string = "https://api.fixpoint.com",
+    apiVersion: ApiVersion = "v1"
+  ) {
     this.baseURL = baseURL;
+    this.apiVersion = apiVersion;
   }
 
   #handleRequest = async (
     url: string,
     options: RequestOptions = {}
   ): Promise<HttpResponse<unknown>> => {
-    const fullURL = joinPaths([this.baseURL, url]);
+    const fullURL = joinPaths([this.baseURL, this.apiVersion, url]);
 
     let body: string | undefined = undefined;
     const reqHeaders: Record<string, string> = options.headers ?? {};
